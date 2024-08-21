@@ -40,8 +40,7 @@ func GetProjectApi(limit int, offset int, authorizeKey string) (*Response, error
 	var parseRes Response
 	err = json.Unmarshal(body, &parseRes)
 	if err != nil {
-		// return nil, errors.New("Error parsing response: " + err.Error())
-		log.Printf("error decoding sakura response: %v", err)
+		log.Printf("error decoding response: %v", err)
 		if e, ok := err.(*json.SyntaxError); ok {
 			log.Printf("syntax error at byte offset %d", e.Offset)
 		}
