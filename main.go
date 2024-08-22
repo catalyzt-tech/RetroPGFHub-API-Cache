@@ -106,7 +106,7 @@ func (s *Server) httpListening() {
 
 func (s *Server) gracefulShutdown(quit <-chan os.Signal) {
 
-	log.Printf("Starting service")
+	log.Printf("Starting service v6")
 	<-quit
 
 	log.Printf("Shutting down service")
