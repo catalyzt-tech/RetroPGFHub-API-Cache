@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 env:
   REGISTRY: docker.io
-  IMAGE_NAME: "tgrziminiar/go-cache:v-6"
+  IMAGE_NAME: "tgrziminiar/go-cache"
 
 jobs:
   amd64:
@@ -27,7 +27,7 @@ jobs:
           file: Dockerfile
           platforms: linux/amd64
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v7
       - name: Deploy to Coolify
         run: | 
          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
