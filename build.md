@@ -1,5 +1,5 @@
-docker buildx build --platform linux/arm64 -t go-cache:v-6 --load .
+docker buildx build --platform linux/arm64 -t go-cache:latest --load .
 
-docker tag go-cache:v-6 tgrziminiar/go-cache:v-6
+docker tag go-cache:latest ghcr.io/tgrziminiar/go-cache:latest
 
-docker push tgrziminiar/go-cache:v-6
+docker push ghcr.io/tgrziminiar/go-cache:latest
