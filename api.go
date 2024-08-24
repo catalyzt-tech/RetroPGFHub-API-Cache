@@ -52,11 +52,11 @@ func GetProjectApi(limit int, offset int, authorizeKey string) (*Response, error
 
 }
 
-func GetAllProjects(authorizeKey string) ([]Datum, error) {
+func GetAllProjects(authorizeKey string) ([]Project, error) {
 	var conditionBreak bool = false
 	var limit, offset int = 100, 0
 
-	var datas []Datum
+	var datas []Project
 
 	for !conditionBreak {
 		res, err := GetProjectApi(limit, offset, authorizeKey)

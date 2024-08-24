@@ -32,7 +32,7 @@ func (ca *CacheApi) HandleCacheApi(c *fiber.Ctx) error {
 
 	cacheData, exist := ca.Cache.Get(API_CACHE_KEY)
 	if exist {
-		if data, ok := cacheData.([]Datum); ok {
+		if data, ok := cacheData.([]Project); ok {
 			return c.Status(fiber.StatusOK).JSON(fiber.Map{
 				"msg":  "ok",
 				"data": data,
@@ -53,11 +53,11 @@ func (ca *CacheApi) HandleCacheApi(c *fiber.Ctx) error {
 	})
 }
 
-func handleCache(c *cache.Cache, authorizeKey string) ([]Datum, error) {
+func handleCache(c *cache.Cache, authorizeKey string) ([]Project, error) {
 	res, err := GetAllProjects(authorizeKey)
 	if err != nil {
 		slog.Error("failed to handle cache", "error", err)
-		return []Datum{}, err
+		return []Project{}, err
 	}
 	c.Set(API_CACHE_KEY, res, cache.NoExpiration)
 	return res, nil
