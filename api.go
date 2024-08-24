@@ -10,7 +10,7 @@ import (
 )
 
 func GetProjectApi(limit int, offset int, authorizeKey string) (*Response, error) {
-	url := fmt.Sprintf("https://vote.optimism.io/api/v1/projects?limit=%d&offset=%d", limit, offset)
+	url := fmt.Sprintf("https://vote.optimism.io/api/v1/retrofunding/rounds/5/projects?limit=%d&offset=%d", limit, offset)
 	method := "GET"
 
 	client := &http.Client{}
