@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: "tgrziminiar/go-cache:latest"
+  IMAGE_NAME: "tgrziminiar/go-cache"
 
 jobs:
   amd64:
