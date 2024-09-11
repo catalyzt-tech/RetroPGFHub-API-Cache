@@ -9,16 +9,16 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/akrylysov/pogreb"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/patrickmn/go-cache"
 	"github.com/robfig/cron/v3"
 )
 
 type Server struct {
 	app          *fiber.App
 	url          string
-	cache        *cache.Cache
+	cache        *pogreb.DB
 	cron         *cron.Cron
 	authorizeKey string
 	corsOrigin   string
@@ -27,9 +27,11 @@ type Server struct {
 func main() {
 
 	var authorKey string = os.Getenv("AUTHORIZE_KEY")
+	fmt.Println(authorKey)
 	if authorKey == "" {
 		panic("Can't find AUTHORIZE_KEY in environment")
 	}
+
 	var port string = os.Getenv("PORT")
 	if port == "" {
 		panic("Can't find PORT in environment")
@@ -39,6 +41,11 @@ func main() {
 	var corsOrigin string = os.Getenv("CORS_ORIGIN")
 	if corsOrigin == "" {
 		panic("Can't find corsOrigin in environment")
+	}
+
+	cache, err := pogreb.Open(API_FILE_FOLDER, nil)
+	if err != nil {
+		panic(err)
 	}
 
 	var s *Server = &Server{
@@ -51,7 +58,7 @@ func main() {
 			},
 		}),
 		url:   port,
-		cache: cache.New(cache.NoExpiration, cache.NoExpiration),
+		cache: cache,
 		cron: cron.New(
 			cron.WithParser(
 				cron.NewParser(
@@ -64,7 +71,7 @@ func main() {
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 
 	fmt.Println("Saving data to cache . . .")
-	_, err := handleCache(s.cache, s.authorizeKey)
+	_, err = handleCache(s.cache, s.authorizeKey)
 	if err != nil {
 		panic(err)
 	}

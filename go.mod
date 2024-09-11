@@ -3,8 +3,8 @@ module github.com/catalyzt-tech/RetroPGFHub-API-Cache
 go 1.22.2
 
 require (
+	github.com/akrylysov/pogreb v0.10.2
 	github.com/gofiber/fiber/v2 v2.52.5
-	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/robfig/cron/v3 v3.0.0
 )
 
