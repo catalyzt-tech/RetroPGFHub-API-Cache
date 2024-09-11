@@ -27,7 +27,6 @@ type Server struct {
 func main() {
 
 	var authorKey string = os.Getenv("AUTHORIZE_KEY")
-	fmt.Println(authorKey)
 	if authorKey == "" {
 		panic("Can't find AUTHORIZE_KEY in environment")
 	}
