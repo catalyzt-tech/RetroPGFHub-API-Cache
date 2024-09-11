@@ -6,6 +6,6 @@ run:
 	./bin/app_prod
 
 # docker buildx build --platform linux/arm64 -t go-cache:latest --load .
-# start:
-# 	go run .
+start:
+	go run .
 
